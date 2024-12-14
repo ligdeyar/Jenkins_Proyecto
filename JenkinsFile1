@@ -14,7 +14,7 @@ pipeline {
 
         }
         //se ejecuta solo si esta en la rama desarrollo
-    	stage('Branch Desarrollo') {
+    	stage('Desarrollo') {
             //se ejecuta solo si esta en esta rama
             when {
                 Branch 'Desarrollo'
@@ -28,6 +28,5 @@ pipeline {
         	}
     	}
     	
-	}
-
 }
+
