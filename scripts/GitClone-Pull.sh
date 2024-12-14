@@ -5,11 +5,11 @@ BRANCH="main"
 
 
 #Veriificar si ya existe el repositorio 
-if [ ! -d "$REPO_DIR" ]; then
-    echo "Clonando el repositorio..."
-    git clone $REPO_URL
-else
-    echo "El repositorio ya existe, actualizando..."
+if [ -d "$REPO_DIR" ]; then
+    echo "Actualizando el repositorio existente..."
     cd $REPO_DIR
     git pull origin $BRANCH
+else
+    echo "Clonando el repositorio..."
+    git clone $REPO_URL $REPO_DIR
 fi
