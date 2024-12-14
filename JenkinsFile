@@ -1,8 +1,5 @@
 pipeline {
 	agent any
-	environment {
-        GITHUB_CREDENTIALS = credentials('github-credentials-id')  // Usa el ID de la credencial
-    }
 	stages {		
 
         stage('Fusionar a Pruebas'){
@@ -43,6 +40,5 @@ pipeline {
 			
     }
 
-    }
+}
     	
-  }
