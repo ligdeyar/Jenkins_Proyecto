@@ -1,4 +1,3 @@
-
 # Definir variables para el acceso al servidor
 USER="ligdeyar" 
 SERVER_IP="200.115.96.110"

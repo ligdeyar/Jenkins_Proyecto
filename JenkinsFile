@@ -56,6 +56,8 @@ pipeline {
 			sh '''
                 	chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
                 	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+					chmod  +x /var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo/
+
             	'''
 			echo "CAMBIOS Hechos"
 		}
