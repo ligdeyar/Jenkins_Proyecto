@@ -2,6 +2,34 @@ pipeline {
 	agent any
 	stages {
 
+		 stage("Git Clone o Actualizar(pull)"){
+            steps{
+                withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
+                sh '''
+                 chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
+                 chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
+                ./scripts/GitClone-Pull.sh
+                '''
+               }
+            }
+        }
+
+		//se ejecuta solo si esta en la rama desarrollo
+    	stage('Desarrollo') {
+            //se ejecuta solo si esta en esta rama
+            when {
+                branch 'Desarrollo'
+            }
+        	steps {
+            	echo "Sincronizando los cambios en desarrollo"
+            	sh '''
+					chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo/scripts
+                    chmod  +x /var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo/scripts/BranchDesarrollo.sh
+					/var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo/scripts/BranchDesarrollo.sh
+            	
+            	'''
+        	}
+			
         stage('Fusionar a Pruebas'){
              when {
                 branch 'Pruebas'
