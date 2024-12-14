@@ -26,7 +26,24 @@ pipeline {
             	'''
         	}
     	}
-		
+		stage('Sincronizacion a Produccion') {
+    	steps {
+			echo "Iniciando sincronización de cambios a Producción"
+			
+			
+				// Cambiar permisos de ejecución para el script de producción
+				sh '''
+					chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+					/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+				'''
+				
+				// Cambiar permisos de ejecución para el directorio o archivos en el workspace (si es necesario)
+				sh '''
+					chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/
+				'''
+			}
+			
+    }
 
     }
     	
