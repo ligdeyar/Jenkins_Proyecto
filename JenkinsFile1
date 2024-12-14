@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+    environment {
+     
+    }
 	stages {
 
         stage('Fusionar a Pruebas'){
@@ -18,8 +21,8 @@ pipeline {
         	steps {
             	echo "Desplegando en servidor de pruebas"
             	sh '''
-                	# Aquí puedes agregar scripts para desplegar cambios
-                	echo "Simulando despliegue en servidor de pruebas"
+                	chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/DesplieguePruebas.sh
+                	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/DesplieguePruebas.sh
             	'''
         	}
     	}
