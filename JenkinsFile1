@@ -30,14 +30,27 @@ pipeline {
             	'''
         	}
     	}
-        stage('Pruebas'){
+        stage('Fusionar a Pruebas'){
              when {
                 branch 'Pruebas'
             }
             steps{
-                
+                echo "Fusionando desarrollo a pruebas"
+            	sh '''
+				    chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/BranchPruebas.sh
+                	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/BranchPruebas.sh
+            	'''
             }
         }
+        stage('Desplegar en pruebas') {
+        	steps {
+            	echo "Desplegando en servidor de pruebas"
+            	sh '''
+                	# Aquí puedes agregar scripts para desplegar cambios
+                	echo "Simulando despliegue en servidor de pruebas"
+            	'''
+        	}
+    	}
     }
     	
 }
