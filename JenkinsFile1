@@ -7,18 +7,23 @@ pipeline {
         stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
-                sh './scripts/GitClone-Pull.java'
+                sh './scripts/GitClone-Pull.sh'
                }
             }
         }
 
         }
-    	stage('Cambios a desarrollo') {
+        //se ejecuta solo si esta en la rama desarrollo
+    	stage('Branch Desarrollo') {
+            //se ejecuta solo si esta en esta rama
+            when {
+                Branch 'Desarrollo'
+            }
         	steps {
-            	echo "Sincronizando cambios en desarrollo"
+            	echo "Sincronizando los cambios en desarrollo"
             	sh '''
-                	git checkout desarrollo
-                	git pull origin desarrollo
+					chmod +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
+					/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
             	'''
         	}
     	}
@@ -26,9 +31,8 @@ pipeline {
         	steps {
             	echo "Fusionando desarrollo a pruebas"
             	sh '''
-                	git checkout pruebas
-                	git merge desarrollo
-                	git push origin pruebas
+				    chmod +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchPruebas.sh
+                	/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchPruebas.sh
             	'''
         	}
     	}
