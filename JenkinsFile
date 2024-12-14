@@ -58,7 +58,7 @@ pipeline {
     	steps {
 			echo "Iniciando sincronización de cambios a Producción"
 			
-			script {
+			
 				// Cambiar permisos de ejecución para el script de producción
 				sh '''
 					chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
@@ -71,8 +71,7 @@ pipeline {
 				'''
 			}
 			
-			echo "CAMBIOS SINCRONIZADOS CORRECTAMENTE A PRODUCCION"
-			}
+    
     }
     	
   }
