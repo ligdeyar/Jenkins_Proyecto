@@ -2,18 +2,6 @@ pipeline {
 	agent any
 	stages {
 
-		stage("Git Clone o Actualizar(pull)"){
-            steps{
-                withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
-                sh '''
-                 chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
-                 chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
-                ./scripts/GitClone-Pull.sh
-                '''
-               }
-            }
-        }
-		
         //se ejecuta solo si esta en la rama desarrollo
     	stage('Desarrollo') {
             //se ejecuta solo si esta en esta rama
@@ -30,36 +18,7 @@ pipeline {
             	'''
         	}
     	}
-		stage('Fusionar a Pruebas'){
-             when {
-                branch 'Pruebas'
-            }
-            steps{
-                echo "Fusionando desarrollo a pruebas"
-            	sh '''
-				    chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/BranchPruebas.sh
-                	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/BranchPruebas.sh
-            	'''
-            }
-        }
-        stage('Desplegar en pruebas') {
-        	steps {
-            	echo "Desplegando en servidor de pruebas"
-            	sh '''
-                	chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/DesplieguePruebas.sh
-                	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/DesplieguePruebas.sh
-            	'''
-        	}
-    	}
-		stage('Sincronizacion a Produccion'){
-			echo "CAMBIOS SINCRONIADOS CORRECTAMENTE A PRODUCCION"
-			sh '''
-                	chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
-                	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
-					chmod  +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/
-            	'''
-			echo "CAMBIOS Hechos"
-		}
+
     }
     	
 }
