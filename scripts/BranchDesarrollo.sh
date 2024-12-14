@@ -1,4 +1,4 @@
-REPO_DIR="/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto"
+REPO_DIR="/var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo"
 BRANCH="Desarrollo"
 
 #Ejecucion de Trabajo  y repositorio local
