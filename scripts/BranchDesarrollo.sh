@@ -1,5 +1,6 @@
 REPO_DIR= "/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto"
 BRANCH='Desarrollo'
+echo "En el directorio: $(pwd)"
 #Ejecucion de Trabajo  y repositorio local
 #cambios locales se integran a la rama desarrollo del repositorio remoto.
 echo "Sincronizando los cambios en la rama de Desarrollo..."

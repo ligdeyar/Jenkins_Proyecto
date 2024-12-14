@@ -22,7 +22,8 @@ pipeline {
         	steps {
             	echo "Sincronizando los cambios en desarrollo"
             	sh '''
-					chmod +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
+					chmod -R +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts
+                    chmod  +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
 					/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
             	'''
         	}
