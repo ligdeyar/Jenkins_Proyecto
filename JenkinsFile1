@@ -1,18 +1,11 @@
 pipeline {
 	agent any
 	stages {
-        stage("Limpieza del espacio de trabajo") {
-            steps {
-                cleanWs()  // Limpia el espacio de trabajo antes de continuar
-            } 
-        }
 
         stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
                 sh '''
-                 rm -rf   /var/lib/jenkins/workspace/Proyecto-IngSof_main
-
                  chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
                  chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
                 ./scripts/GitClone-Pull.sh
