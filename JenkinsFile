@@ -1,5 +1,6 @@
 pipeline {
 	agent any
+<<<<<<< HEAD
 	stages {
 
         stage("Git Clone o Actualizar(pull)"){
@@ -30,6 +31,9 @@ pipeline {
             	'''
         	}
     	}
+=======
+	stages {			
+>>>>>>> ef217bc194557b3e2a42cca827642c78458b9648
         stage('Fusionar a Pruebas'){
              when {
                 branch 'Pruebas'
@@ -55,6 +59,7 @@ pipeline {
 			echo "CAMBIOS SINCRONIADOS CORRECTAMENTE A PRODUCCION"
 			sh '''
                 	chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+<<<<<<< HEAD
                 	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
 					chmod  +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/
 
@@ -66,3 +71,12 @@ pipeline {
     	
 }
 
+=======
+					chmod  +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/
+                	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+            	'''
+		}
+    }
+    	
+  }
+>>>>>>> ef217bc194557b3e2a42cca827642c78458b9648

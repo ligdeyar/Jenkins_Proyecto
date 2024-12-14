@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Definir variables para el acceso al servidor
 USER="ligdeyar" 
 SERVER_IP="200.115.96.110"
@@ -27,17 +26,3 @@ EOF
 
 # Confirmación del despliegue
 echo "Despliegue en pruebas completado."
-=======
-# Variables
-REPO_DIR="/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto"
-REPO_URL="https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/ligdeyar/Jenkins_Proyecto.git"
-BRANCH="main"
-TESTING_BRANCH="Pruebas"
-
-
-git checkout $BRANCH
-git merge $TESTING_BRANCH
-git push origin $BRANCH
-
-echo "CAMBIOS SINCRONIADOS CORRECTAMENTE A PRODUCCION"
->>>>>>> ef217bc194557b3e2a42cca827642c78458b9648
