@@ -1,7 +1,6 @@
 pipeline {
 	agent any
 	stages {
-
 		 stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
