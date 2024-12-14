@@ -1,23 +1,23 @@
 pipeline {
 	agent any
-    environment {
-        // Variables
-    }
 	stages {
         stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
-                sh './scripts/GitClone-Pull.java'
+                sh '''
+                 chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
+                 chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
+                ./scripts/GitClone-Pull.sh
+                '''
                }
             }
         }
 
-        }
-    	//se ejecuta solo si esta en la rama desarrollo
+        //se ejecuta solo si esta en la rama desarrollo
     	stage('Desarrollo') {
             //se ejecuta solo si esta en esta rama
             when {
-                Branch 'Desarrollo'
+                branch 'Desarrollo'
             }
         	steps {
             	echo "Sincronizando los cambios en desarrollo"
@@ -27,5 +27,6 @@ pipeline {
             	'''
         	}
     	}
-   
+    }
+    	
 }
