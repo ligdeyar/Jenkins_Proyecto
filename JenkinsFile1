@@ -4,7 +4,11 @@ pipeline {
         stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
-                sh './scripts/GitClone-Pull.sh'
+                sh '
+                 chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
+                 chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
+                ./scripts/GitClone-Pull.sh
+                '
                }
             }
         }
@@ -17,10 +21,10 @@ pipeline {
             }
         	steps {
             	echo "Sincronizando los cambios en desarrollo"
-            	sh '''
+            	sh '
 					chmod +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
 					/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
-            	'''
+            	'
         	}
     	}
     }
