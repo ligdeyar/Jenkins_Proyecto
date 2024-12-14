@@ -1,8 +1,5 @@
 pipeline {
 	agent any
-    environment {
-        // Variables
-    }
 	stages {
         stage("Git Clone o Actualizar(pull)"){
             steps{
@@ -12,7 +9,6 @@ pipeline {
             }
         }
 
-        }
         //se ejecuta solo si esta en la rama desarrollo
     	stage('Desarrollo') {
             //se ejecuta solo si esta en esta rama
@@ -27,6 +23,7 @@ pipeline {
             	'''
         	}
     	}
+    }
     	
 }
 
