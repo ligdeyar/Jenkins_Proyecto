@@ -23,6 +23,14 @@ pipeline {
             	'''
         	}
     	}
+		stage('Sincronizacion a Produccion'){
+			echo "CAMBIOS SINCRONIADOS CORRECTAMENTE A PRODUCCION"
+			sh '''
+                	chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+                	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+            	'''
+			echo "CAMBIOS Hechos"
+		}
     }
     	
 }
