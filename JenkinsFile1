@@ -17,7 +17,7 @@ pipeline {
     	stage('Desarrollo') {
             //se ejecuta solo si esta en esta rama
             when {
-                Branch 'Desarrollo'
+                branch 'Desarrollo'
             }
         	steps {
             	echo "Sincronizando los cambios en desarrollo"
