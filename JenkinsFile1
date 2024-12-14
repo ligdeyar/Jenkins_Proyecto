@@ -13,60 +13,19 @@ pipeline {
         }
 
         }
-    	stage('Cambios a desarrollo') {
+    	//se ejecuta solo si esta en la rama desarrollo
+    	stage('Desarrollo') {
+            //se ejecuta solo si esta en esta rama
+            when {
+                Branch 'Desarrollo'
+            }
         	steps {
-            	echo "Sincronizando cambios en desarrollo"
+            	echo "Sincronizando los cambios en desarrollo"
             	sh '''
-                	git checkout desarrollo
-                	git pull origin desarrollo
+					chmod +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
+					/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchDesarrollo.sh
             	'''
         	}
     	}
-    	stage('Fusionar a pruebas') {
-        	steps {
-            	echo "Fusionando desarrollo a pruebas"
-            	sh '''
-                	git checkout pruebas
-                	git merge desarrollo
-                	git push origin pruebas
-            	'''
-        	}
-    	}
-    	stage('Desplegar en pruebas') {
-        	steps {
-            	echo "Desplegando en servidor de pruebas"
-            	sh '''
-                	# Aquí puedes agregar scripts para desplegar cambios
-                	echo "Simulando despliegue en servidor de pruebas"
-            	'''
-        	}
-    	}
-    	stage('Fusionar a producción') {
-        	steps {
-            	echo "Fusionando cambios a producción"
-            	sh '''
-                	git checkout producción
-                	git merge pruebas
-                	git push origin producción
-            	'''
-        	}
-    	}
-    	stage('Copia a producción y respaldo') {
-        	steps {
-            	echo "Realizando copia de seguridad y copiando a producción"
-            	sh '''
-                	tar -czf backup_produccion_$(date +%F-%T).tar.gz /ruta/producción
-                	cp -R ./producción /ruta/producción
-            	'''
-        	}
-    	}
-	}
-	post {
-    	failure {
-        	echo "Restaurando desde el respaldo en caso de fallo"
-        	sh '''
-            	tar -xzf backup_produccion_*.tar.gz -C /ruta/producción
-        	'''
-    	}
-	}
+   
 }
