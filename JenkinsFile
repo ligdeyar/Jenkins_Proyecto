@@ -31,26 +31,12 @@ pipeline {
     	}
 		stage('Sincronizacion a Produccion') {
 			steps {
-				 script {
-                    REPO_DIR = "/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto"
-                    BRANCH = "main"
-                    TESTING_BRANCH = "Pruebas"
-
-                    // Verificar que el repositorio ya esté en el directorio
-                    dir(REPO_DIR) {
-                        // Asegurarnos de estar en el directorio del repositorio y de hacer un checkout de la rama principal
-                        sh 'git fetch origin'
-                        sh 'git checkout $BRANCH'
-                        
-                        // Hacer el merge de la rama de pruebas a la principal
-                        sh 'git merge origin/$TESTING_BRANCH'
-
-                        // Empujar los cambios a la rama principal en el repositorio remoto
-                        sh 'git push origin $BRANCH'
-
-                        // Mensaje final de sincronización
-                        echo "CAMBIOS SINCRONIZADOS CORRECTAMENTE A PRODUCCION"
-                    }
+				echo "Sincronizando los cambios a producción..."
+                sh '''
+                    chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+                    /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+                '''
+                    
                 }
 
 				}
