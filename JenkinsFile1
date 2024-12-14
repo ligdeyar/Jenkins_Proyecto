@@ -1,72 +1,43 @@
 pipeline {
 	agent any
-    environment {
-        // Variables
-    }
 	stages {
+
         stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
-                sh './scripts/GitClone-Pull.java'
+                sh '''
+                 chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts
+                 chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/GitClone-Pull.sh
+                ./scripts/GitClone-Pull.sh
+                '''
                }
             }
         }
 
+        //se ejecuta solo si esta en la rama desarrollo
+    	stage('Desarrollo') {
+            //se ejecuta solo si esta en esta rama
+            when {
+                branch 'Desarrollo'
+            }
+        	steps {
+            	echo "Sincronizando los cambios en desarrollo"
+            	sh '''
+					chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo/scripts
+                    chmod  +x /var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo/scripts/BranchDesarrollo.sh
+					/var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo/scripts/BranchDesarrollo.sh
+            	
+            	'''
+        	}
+    	}
+        stage('Pruebas'){
+             when {
+                branch 'Pruebas'
+            }
+            steps{
+                
+            }
         }
-    	stage('Cambios a desarrollo') {
-        	steps {
-            	echo "Sincronizando cambios en desarrollo"
-            	sh '''
-                	git checkout desarrollo
-                	git pull origin desarrollo
-            	'''
-        	}
-    	}
-    	stage('Fusionar a pruebas') {
-        	steps {
-            	echo "Fusionando desarrollo a pruebas"
-            	sh '''
-                	git checkout pruebas
-                	git merge desarrollo
-                	git push origin pruebas
-            	'''
-        	}
-    	}
-    	stage('Desplegar en pruebas') {
-        	steps {
-            	echo "Desplegando en servidor de pruebas"
-            	sh '''
-                	# Aquí puedes agregar scripts para desplegar cambios
-                	echo "Simulando despliegue en servidor de pruebas"
-            	'''
-        	}
-    	}
-    	stage('Fusionar a producción') {
-        	steps {
-            	echo "Fusionando cambios a producción"
-            	sh '''
-                	git checkout producción
-                	git merge pruebas
-                	git push origin producción
-            	'''
-        	}
-    	}
-    	stage('Copia a producción y respaldo') {
-        	steps {
-            	echo "Realizando copia de seguridad y copiando a producción"
-            	sh '''
-                	tar -czf backup_produccion_$(date +%F-%T).tar.gz /ruta/producción
-                	cp -R ./producción /ruta/producción
-            	'''
-        	}
-    	}
-	}
-	post {
-    	failure {
-        	echo "Restaurando desde el respaldo en caso de fallo"
-        	sh '''
-            	tar -xzf backup_produccion_*.tar.gz -C /ruta/producción
-        	'''
-    	}
-	}
+    }
+    	
 }
