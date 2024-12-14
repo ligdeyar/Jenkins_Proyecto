@@ -2,17 +2,6 @@ pipeline {
 	agent any
 	stages {		
 
-			stage("Git Clone o Actualizar(pull)"){
-            steps{
-                withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
-                sh '''
-                 chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
-                 chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
-                ./scripts/GitClone-Pull.sh
-                '''
-               }
-            }
-        }
         stage('Fusionar a Pruebas'){
              when {
                 branch 'Pruebas'
