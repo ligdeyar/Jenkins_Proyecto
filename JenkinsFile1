@@ -5,7 +5,11 @@ pipeline {
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
                 sh '''
-                 set -e
+                   # Eliminar el repositorio clonado previamente, si existe
+                    rm -rf /var/lib/jenkins/workspace/Proyecto-IngSof_Desarrollo
+                   set -e
+
+                    #Clonar nuevamente
                  chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
                  chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
                 ./scripts/GitClone-Pull.sh
