@@ -4,7 +4,7 @@ REPO_URL="https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/ligdeyar/Jenkins_
 BRANCH="main"
 TESTING_BRANCH="Pruebas"
 
-
+cd $REPO_DIR
 git checkout $BRANCH
 git merge $TESTING_BRANCH
 git push origin $BRANCH
