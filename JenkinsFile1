@@ -27,50 +27,7 @@ pipeline {
             	'''
         	}
     	}
-    	stage('Fusionar a pruebas') {
-        	steps {
-            	echo "Fusionando desarrollo a pruebas"
-            	sh '''
-				    chmod +x /var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchPruebas.sh
-                	/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto/scripts/BranchPruebas.sh
-            	'''
-        	}
-    	}
-    	stage('Desplegar en pruebas') {
-        	steps {
-            	echo "Desplegando en servidor de pruebas"
-            	sh '''
-                	# Aquí puedes agregar scripts para desplegar cambios
-                	echo "Simulando despliegue en servidor de pruebas"
-            	'''
-        	}
-    	}
-    	stage('Fusionar a producción') {
-        	steps {
-            	echo "Fusionando cambios a producción"
-            	sh '''
-                	git checkout producción
-                	git merge pruebas
-                	git push origin producción
-            	'''
-        	}
-    	}
-    	stage('Copia a producción y respaldo') {
-        	steps {
-            	echo "Realizando copia de seguridad y copiando a producción"
-            	sh '''
-                	tar -czf backup_produccion_$(date +%F-%T).tar.gz /ruta/producción
-                	cp -R ./producción /ruta/producción
-            	'''
-        	}
-    	}
+    	
 	}
-	post {
-    	failure {
-        	echo "Restaurando desde el respaldo en caso de fallo"
-        	sh '''
-            	tar -xzf backup_produccion_*.tar.gz -C /ruta/producción
-        	'''
-    	}
-	}
+
 }
