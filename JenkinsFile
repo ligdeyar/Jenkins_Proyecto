@@ -29,7 +29,6 @@ pipeline {
                 	/var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
 					chmod  +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/
             	'''
-			echo "CAMBIOS Hechos"
 		}
     }
     	
