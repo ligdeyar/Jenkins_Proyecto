@@ -4,7 +4,8 @@ pipeline {
         stage("Limpiar el workspace"){
             steps{
                 script{
-                    sh "rm -rf ./*"
+                    sh "+ rm -rf ./JenkinsFile ./prueba.txt ./scripts"
+
                 }
             }
         }
