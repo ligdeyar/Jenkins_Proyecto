@@ -1,11 +1,25 @@
 pipeline {
 	agent any
     stages{
-    
+    tage("Checkout SCM") {
+            steps {
+                // Usamos las credenciales de GitHub configuradas en Jenkins
+                withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]) {
+                    // Este es el paso para hacer el checkout del código
+                    echo "Haciendo checkout del código"
+                    checkout scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: '*/main']],  // Puedes cambiar esto a la rama que necesites
+                        userRemoteConfigs: [[url: 'https://github.com/ligdeyar/Jenkins_Proyecto.git', credentialsId: 'GITHUB_CREDENCIAL']]
+                    ]
+                }
+            }
+        }
         //1
         stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
+
                 sh '''
                  chmod -R +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts
                  chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_main/scripts/GitClone-Pull.sh
