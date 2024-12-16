@@ -1,7 +1,6 @@
 pipeline {
 	agent any
 	stages {		
-
         stage('Fusionar a Pruebas'){
              when {
                 branch 'Pruebas'
@@ -34,9 +33,8 @@ pipeline {
                     /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
                 '''
                     
-                }
-
-				}
+            }
+		}
 			
     }
 
