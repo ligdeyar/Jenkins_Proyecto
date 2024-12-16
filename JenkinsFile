@@ -1,11 +1,17 @@
 pipeline {
 	agent any
 	stages {	
-         stage("Limpiar el workspace"){
-            steps{
-                script{
-                    sh "+ rm -rf ./JenkinsFile ./prueba.txt ./scripts"
-
+         stage("Checkout SCM") {
+            steps {
+                // Usamos las credenciales de GitHub configuradas en Jenkins
+                withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]) {
+                    // Este es el paso para hacer el checkout del código
+                    echo "Haciendo checkout del código"
+                    checkout scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: '*/Pruebas']],  // Puedes cambiar esto a la rama que necesites
+                        userRemoteConfigs: [[url: 'https://github.com/ligdeyar/Jenkins_Proyecto.git', credentialsId: 'GITHUB_CREDENCIAL']]
+                    ]
                 }
             }
         }

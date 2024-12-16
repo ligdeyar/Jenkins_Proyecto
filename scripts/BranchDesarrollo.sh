@@ -1,4 +1,4 @@
-REPO_DIR= "/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto"
+REPO_DIR= "/var/lib/jenkins/workspace/Clone_Repository/"
 BRANCH='Desarrollo'
 #Ejecucion de Trabajo  y repositorio local
 #cambios locales se integran a la rama desarrollo del repositorio remoto.

@@ -1,7 +1,7 @@
 # Definir variables para el acceso al servidor
 USER="ligdeyar" 
 SERVER_IP="200.115.96.110"
-REPO_DIR= "/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto"
+REPO_DIR= "/var/lib/jenkins/workspace/Clone_Repository/"
 BRANCH="Pruebas" 
 DEVELOPMENT_BRANCH="Desarrollo"
 SSH_KEY_PATH= "~/.ssh/id_rsa.pub"   
