@@ -1,5 +1,5 @@
 # Variables
-REPO_DIR="/var/lib/jenkins/workspace/Clone_Repository/Jenkins_Proyecto"
+REPO_DIR="/var/lib/jenkins/workspace/Clone_Repository/"
 BRANCH="main"
 TESTING_BRANCH="Pruebas"
 
