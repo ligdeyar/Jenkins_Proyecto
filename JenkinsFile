@@ -1,7 +1,6 @@
 pipeline {
 	agent any
 	stages {
-
         //se ejecuta solo si esta en la rama desarrollo
     	stage('Desarrollo') {
             //se ejecuta solo si esta en esta rama
