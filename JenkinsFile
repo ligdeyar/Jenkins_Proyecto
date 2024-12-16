@@ -1,7 +1,7 @@
 pipeline {
 	agent any
     stages{
-    tage("Checkout SCM") {
+    stage("Checkout SCM") {
             steps {
                 // Usamos las credenciales de GitHub configuradas en Jenkins
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]) {
