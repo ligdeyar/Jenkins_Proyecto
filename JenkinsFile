@@ -1,6 +1,13 @@
 pipeline {
 	agent any
     stages{
+        stage("Limpiar el workspace"){
+            steps{
+                script{
+                    sh "rm -rf ./*"
+                }
+            }
+        }
         //1
         stage("Git Clone o Actualizar(pull)"){
             steps{
