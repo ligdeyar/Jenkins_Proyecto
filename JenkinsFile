@@ -1,6 +1,7 @@
 pipeline {
 	agent any
-
+    stages{
+        //1
         stage("Git Clone o Actualizar(pull)"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'GITHUB_CREDENCIAL', usernameVariable:'GITHUB_USERNAME', passwordVariable:'GITHUB_PASSWORD')]){
@@ -12,7 +13,7 @@ pipeline {
                }
             }
         }
-
+        //2
         //se ejecuta solo si esta en la rama desarrollo
     	stage('Desarrollo') {
             //se ejecuta solo si esta en esta rama
@@ -54,15 +55,17 @@ pipeline {
         	}
     	}
         stage('Sincronizacion a Produccion') {
-    	steps {
-			 	echo "Sincronizando los cambios a producción..."
-                sh '''
-                    chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
-                    /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
-                '''
-                }
+            steps {
+                    echo "Sincronizando los cambios a producción..."
+                    sh '''
+                        chmod +x /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+                        /var/lib/jenkins/workspace/Proyecto-IngSof_Pruebas/scripts/PruebasaProduccion.sh
+                    '''
+                    }
 			}
-			
+
+
+    }
     
     }
     	
